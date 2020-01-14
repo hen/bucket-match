@@ -8,6 +8,7 @@ module BucketMatch
   # Uses exact match and then White Similarity.
   # TODO: Replace the hash with a subclass of hash and add get_extra_array1 and get_extra_array2 functions
   # TODO: Support a second level of arrays that treats one of those values matching. 
+  # TODO: Add an optional filter value so that matches under a certain %age are skipped
   def self.match(array1, array2)
 
     # Copy the arrays to sets as a) we'll be removing entries, and b) sets will have quicker lookup
