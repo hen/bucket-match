@@ -7,6 +7,7 @@ module BucketMatch
   # Extra entries from both arrays will not be included
   # Uses exact match and then White Similarity.
   # TODO: Replace the hash with a subclass of hash and add get_extra_array1 and get_extra_array2 functions
+  # TODO: Support a second level of arrays that treats one of those values matching. 
   def self.match(array1, array2)
 
     # Copy the arrays to sets as a) we'll be removing entries, and b) sets will have quicker lookup
@@ -38,7 +39,6 @@ module BucketMatch
       found_element2 = nil
       set2.each do |element2|
         distance = white.similarity(element1, element2)
-        puts "Distance found of #{distance} for #{element1} and #{element2}"
         if(distance > best_distance)
           best_distance = distance
           found_element2 = element2
