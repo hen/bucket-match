@@ -9,7 +9,9 @@ module BucketMatch
   # TODO: Replace the hash with a subclass of hash and add get_extra_array1 and get_extra_array2 functions
   # TODO: Support a second level of arrays that treats one of those values matching. 
   # TODO: Add an optional filter value so that matches under a certain %age are skipped
-  def self.match(array1, array2)
+  def self.match(array1, array2, min_percentage=0)
+
+    # TODO: if min > 100, error
 
     # Copy the arrays to sets as a) we'll be removing entries, and b) sets will have quicker lookup
     set1 = array1.to_set
@@ -40,7 +42,8 @@ module BucketMatch
       found_element2 = nil
       set2.each do |element2|
         distance = white.similarity(element1, element2)
-        if(distance > best_distance)
+        #DEBUG: puts "Comparing #{element1} to #{element2} --> #{distance} distance"
+        if(distance > best_distance and distance > min_percentage)
           best_distance = distance
           found_element2 = element2
         end
